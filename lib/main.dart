@@ -1,3 +1,4 @@
+import 'package:course_center/pages/sign_in/sign_in.dart';
 import 'package:course_center/pages/welcome/bloc/welcome_blocs.dart';
 import 'package:course_center/pages/welcome/welcome.dart';
 import 'package:flutter/material.dart';
@@ -15,14 +16,36 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => WelcomeBloc(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => WelcomeBloc()),
+      ],
       child: ScreenUtilInit(
-        builder: (context, child) => const MaterialApp(
+        builder: (context, child) => MaterialApp(
           debugShowCheckedModeBanner: false,
-          home: Welcome(),
+          theme: ThemeData(
+            appBarTheme: const AppBarTheme(
+              elevation: 0,
+              backgroundColor: Colors.white
+            )
+          ),
+          home: const Welcome(),
+          routes: {
+            'myHomePage' : (context) => const MyHomePage(),
+            'signIn': (context) => const SignIn(),
+          },
         ),
       ),
     );
   }
 }
+
+class MyHomePage extends StatelessWidget {
+  const MyHomePage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return const Placeholder();
+  }
+}
+

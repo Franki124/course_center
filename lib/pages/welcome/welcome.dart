@@ -1,7 +1,6 @@
 import 'package:course_center/pages/welcome/bloc/welcome_blocs.dart';
 import 'package:course_center/pages/welcome/bloc/welcome_events.dart';
 import 'package:dots_indicator/dots_indicator.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -16,71 +15,71 @@ class Welcome extends StatefulWidget {
 }
 
 class _WelcomeState extends State<Welcome> {
+  PageController pageController = PageController(initialPage: 0);
+
   @override
   Widget build(BuildContext context) {
     return Container(
       color: Colors.white,
-      child: Scaffold(
-        body: BlocBuilder<WelcomeBloc, WelcomeState>(
-          builder: (context, state) {
-            return Container(
-              margin: EdgeInsets.only(top: 34.h),
-              width: 375.w,
-              child: Stack(
-                alignment: Alignment.topCenter,
-                children: [
-                  PageView(
-                    onPageChanged: (index){
-                      state.page = index;
-                      BlocProvider.of<WelcomeBloc>(context).add(WelcomeEvent());
-                    },
-                    children: [
-                      _page(
-                          1,
-                          context,
-                          'Next',
-                          'First See Learning',
-                          'Forget about paper for a moment, all knowledge in one learning',
-                          'image 1'),
-                      _page(
-                          2,
-                          context,
-                          'Next',
-                          'Connect With Everyone',
-                          "Always keep in touch with you tutor & friend. Let's get connected",
-                          'image 2'),
-                      _page(
-                          3,
-                          context,
-                          'Get Started',
-                          'Always fascinated Learning',
-                          'Anywhere, anytime. The time is at our control',
-                          'image 3'),
-                    ],
-                  ),
-                  Positioned(
-                    bottom: 100.h,
-                    child: DotsIndicator(
-                      position: state.page,
-                      dotsCount: 3,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      decorator: DotsDecorator(
-                        color: Colors.grey,
-                        size: Size.square(8.0),
-                        activeSize: Size(20.0, 8.0),
-                        activeColor: Colors.blue,
-                        activeShape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(5.0)
-                        ),
-                      ),
+      child: Scaffold(body: BlocBuilder<WelcomeBloc, WelcomeState>(
+        builder: (context, state) {
+          return Container(
+            margin: EdgeInsets.only(top: 34.h),
+            width: 375.w,
+            child: Stack(
+              alignment: Alignment.topCenter,
+              children: [
+                PageView(
+                  controller: pageController,
+                  onPageChanged: (index) {
+                    state.page = index;
+                    BlocProvider.of<WelcomeBloc>(context).add(WelcomeEvent());
+                  },
+                  children: [
+                    _page(
+                        1,
+                        context,
+                        'Next',
+                        'First See Learning',
+                        'Forget about paper for a moment, all knowledge in one learning',
+                        'assets/images/reading.png'),
+                    _page(
+                        2,
+                        context,
+                        'Next',
+                        'Connect With Everyone',
+                        "Always keep in touch with you tutor & friend. Let's get connected",
+                        'assets/images/boy.png'),
+                    _page(
+                        3,
+                        context,
+                        'Get Started',
+                        'Always fascinated Learning',
+                        'Anywhere, anytime. The time is at our control',
+                        'assets/images/man.png'),
+                  ],
+                ),
+                Positioned(
+                  bottom: 100.h,
+                  child: DotsIndicator(
+                    position: state.page,
+                    dotsCount: 3,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    decorator: DotsDecorator(
+                      color: Colors.grey,
+                      size: Size.square(8.0),
+                      activeSize: Size(20.0, 8.0),
+                      activeColor: Colors.blue,
+                      activeShape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(5.0)),
                     ),
                   ),
-                ],
-              ),
-            );
-          },
-        )
-      ),
+                ),
+              ],
+            ),
+          );
+        },
+      )),
     );
   }
 
@@ -91,7 +90,10 @@ class _WelcomeState extends State<Welcome> {
         SizedBox(
           width: 345.w,
           height: 345.w,
-          child: Text(imagePath),
+          child: Image.asset(
+            imagePath,
+            fit: BoxFit.cover,
+          ),
         ),
         Container(
           child: Text(
@@ -113,27 +115,42 @@ class _WelcomeState extends State<Welcome> {
                 fontWeight: FontWeight.normal),
           ),
         ),
-        Container(
-          margin: EdgeInsets.only(top: 100.h, left: 25.w, right: 25.w),
-          width: 325.w,
-          height: 50.h,
-          decoration: BoxDecoration(
-              color: Colors.blue.shade900,
-              borderRadius: BorderRadius.circular(15.w),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.1),
-                  spreadRadius: 1,
-                  blurRadius: 2,
-                  offset: const Offset(0, 1),
-                ),
-              ]),
-          child: Center(
-            child: Text(buttonName,
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 24.sp,
-                    fontWeight: FontWeight.normal)),
+        GestureDetector(
+          onTap: () {
+            //within 0-2 index
+            if (index < 3) {
+              // animation
+              pageController.animateToPage(index,
+                  duration: const Duration(milliseconds: 500),
+                  curve: Curves.decelerate);
+            } else {
+              // jump to new page
+              // Navigator.of(context).push(MaterialPageRoute(builder: (context) {              }));
+              Navigator.of(context).pushNamedAndRemoveUntil('signIn', (route) => false);
+            }
+          },
+          child: Container(
+            margin: EdgeInsets.only(top: 100.h, left: 25.w, right: 25.w),
+            width: 325.w,
+            height: 50.h,
+            decoration: BoxDecoration(
+                color: Colors.blue.shade900,
+                borderRadius: BorderRadius.circular(15.w),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.1),
+                    spreadRadius: 1,
+                    blurRadius: 2,
+                    offset: const Offset(0, 1),
+                  ),
+                ]),
+            child: Center(
+              child: Text(buttonName,
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 24.sp,
+                      fontWeight: FontWeight.normal)),
+            ),
           ),
         )
       ],
