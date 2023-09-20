@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "27725880492",
+    "project_id": "course-center-585c0",
+    "storage_bucket": "course-center-585c0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:27725880492:android:b071fc9e95d827de5e5309",
+        "android_client_info": {
+          "package_name": "com.franki.course_center"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCs1lL25qQtuaDtoDMnwIwU0zt66uiMufU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
