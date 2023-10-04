@@ -1,6 +1,7 @@
 import 'package:course_center/pages/sign_in/bloc/sign_in_blocs.dart';
 import 'package:course_center/pages/sign_in/bloc/sign_in_event.dart';
 import 'package:course_center/pages/sign_in/bloc/signin_states.dart';
+import 'package:course_center/pages/sign_in/sign_in_controller.dart';
 import 'package:course_center/pages/sign_in/widgets/sign_in_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -48,8 +49,12 @@ class SignIn extends StatelessWidget {
                     ),
                   ),
                   forgotPassword(),
-                  buildLogInAndRegButton('Log In', 'login'),
-                  buildLogInAndRegButton('Register', 'register'),
+                  buildLogInAndRegButton('Log In', 'login', () {
+                    SignInController(context: context).handleSignIn('email');
+                  }),
+                  buildLogInAndRegButton('Register', 'register', () {
+                    SignInController(context: context).handleSignIn('email');
+                  }),
                 ],
               ),
             ),
