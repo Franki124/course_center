@@ -16,11 +16,12 @@ class SignInController {
         String emailAddress = state.email;
         String password = state.password;
         if (emailAddress.isEmpty) {
-          print('empty email');
           toastInfo(msg: 'Please provide email address', backgroundColor: Colors.red);
+          return;
         }
         if (password.isEmpty) {
           toastInfo(msg: 'Please provide password', backgroundColor: Colors.red);
+          return;
         }
         try {
           final credential = await FirebaseAuth.instance
@@ -28,16 +29,20 @@ class SignInController {
                   email: emailAddress, password: password);
           if(credential.user == null) {
             toastInfo(msg: "User doesn't exist", backgroundColor: Colors.red);
+            return;
           }
           if (!credential.user!.emailVerified) {
             toastInfo(msg: "User is not verified", backgroundColor: Colors.red);
+            return;
           }
 
           var user = credential.user;
           if(user != null) {
             toastInfo(msg: 'User exist', backgroundColor: Colors.green);
+            return;
           } else {
             toastInfo(msg: "No user", backgroundColor: Colors.red);
+            return;
           }
         } on FirebaseAuthException catch (e) {
           if (e.code == 'user-not-found') {
