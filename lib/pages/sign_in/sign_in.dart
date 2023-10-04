@@ -7,7 +7,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class SignIn extends StatelessWidget {
+class SignIn extends StatefulWidget {
+  @override
+  State<SignIn> createState() => _SignInState();
+}
+
+class _SignInState extends State<SignIn> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<SignInBloc, SignInState>(builder: (context, state) {
@@ -50,10 +55,10 @@ class SignIn extends StatelessWidget {
                   ),
                   forgotPassword(),
                   buildLogInAndRegButton('Log In', 'login', () {
-                    SignInController(context: context).handleSignIn('email');
+                    SignInController(context:context).handleSignIn('email');
                   }),
                   buildLogInAndRegButton('Register', 'register', () {
-                    SignInController(context: context).handleSignIn('email');
+                    SignInController(context:context).handleSignIn('email');
                   }),
                 ],
               ),
