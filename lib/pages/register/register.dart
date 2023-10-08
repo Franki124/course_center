@@ -1,11 +1,11 @@
+import 'package:course_center/pages/register/bloc/register_blocs.dart';
+import 'package:course_center/pages/register/bloc/register_events.dart';
+import 'package:course_center/pages/register/bloc/register_states.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../common_widgets.dart';
-import '../sign_in/bloc/sign_in_blocs.dart';
-import '../sign_in/bloc/sign_in_events.dart';
-import '../sign_in/bloc/signin_states.dart';
 
 class Register extends StatefulWidget {
   const Register({Key? key}) : super(key: key);
@@ -17,7 +17,7 @@ class Register extends StatefulWidget {
 class _RegisterState extends State<Register> {
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<SignInBloc, SignInState>(builder: (context, state) {
+    return BlocBuilder<RegisterBlocs, RegisterStates>(builder: (context, state) {
       return Container(
         color: Colors.white,
         child: SafeArea(
@@ -41,19 +41,19 @@ class _RegisterState extends State<Register> {
                         reusableText('User name'),
                         buildTextField('Enter your username', 'name', 'user',
                             (value) {
-                          context.read()<SignInBloc>().add(EmailEvent(value));
+                          context.read()<RegisterBlocs>().add(UserNameEvent(value));
                         }),
                         reusableText('Email'),
                         buildTextField(
                             'Enter your email address', 'email', 'user',
                             (value) {
-                          context.read()<SignInBloc>().add(EmailEvent(value));
+                          context.read()<RegisterBlocs>().add(EmailEvent(value));
                         }),
                         reusableText('Password'),
                         buildTextField(
                             'Enter your password', 'password', 'lock', (value) {
                           context
-                              .read()<SignInBloc>()
+                              .read()<RegisterBlocs>().add(PasswordEvent(value))
                               .add(PasswordEvent(value));
                         }),
                         reusableText('Confirm Password'),
@@ -61,8 +61,8 @@ class _RegisterState extends State<Register> {
                             'Re-enter your password', 'password', 'lock',
                             (value) {
                           context
-                              .read()<SignInBloc>()
-                              .add(PasswordEvent(value));
+                              .read()<RegisterBlocs>().add(RePasswordEvent(value))
+                              .add(RePasswordEvent(value));
                         }),
                       ],
                     ),
