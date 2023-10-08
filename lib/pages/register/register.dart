@@ -1,6 +1,7 @@
 import 'package:course_center/pages/register/bloc/register_blocs.dart';
 import 'package:course_center/pages/register/bloc/register_events.dart';
 import 'package:course_center/pages/register/bloc/register_states.dart';
+import 'package:course_center/pages/register/register_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -73,6 +74,7 @@ class _RegisterState extends State<Register> {
                         'Enter your details below and free sign up'),
                   ),
                   buildLogInAndRegButton('Sign up', 'login', () {
+                    RegisterController(context: context).handleEmailRegister();
                     Navigator.of(context).pushNamed('register');
                   }),
                 ],
