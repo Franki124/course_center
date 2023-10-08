@@ -1,4 +1,6 @@
+import 'package:course_center/common/values/colors.dart';
 import 'package:course_center/pages/bloc_providers.dart';
+import 'package:course_center/pages/register/register.dart';
 import 'package:course_center/pages/sign_in/bloc/sign_in_blocs.dart';
 import 'package:course_center/pages/sign_in/sign_in.dart';
 import 'package:course_center/pages/welcome/bloc/welcome_blocs.dart';
@@ -28,6 +30,9 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
             appBarTheme: const AppBarTheme(
+              iconTheme: IconThemeData(
+                color: AppColors.primaryText,
+              ),
               elevation: 0,
               backgroundColor: Colors.white
             )
@@ -35,7 +40,8 @@ class MyApp extends StatelessWidget {
           home: const Welcome(),
           routes: {
             'myHomePage' : (context) =>  const MyHomePage(),
-            'signIn': (context) => SignIn(),
+            'signIn': (context) => const SignIn(),
+            'register' : (context) => const Register(),
           },
         ),
       ),

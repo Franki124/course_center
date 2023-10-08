@@ -1,4 +1,4 @@
-import 'package:course_center/pages/sign_in/bloc/sign_in_event.dart';
+import 'package:course_center/pages/sign_in/bloc/sign_in_events.dart';
 import 'package:course_center/pages/sign_in/bloc/signin_states.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
