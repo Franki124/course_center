@@ -41,14 +41,14 @@ class _SignInState extends State<SignIn> {
                         buildTextField(
                             'Enter your email address', 'email', 'user',
                             (value) {
-                          context.read()<SignInBloc>().add(EmailEvent(value));
+                          context.read<SignInBloc>().add(EmailEvent(value));
                         }),
                         reusableText('Password'),
                         SizedBox(height: 5.h),
                         buildTextField(
                             'Enter your password', 'password', 'lock', (value) {
                           context
-                              .read()<SignInBloc>()
+                              .read<SignInBloc>()
                               .add(PasswordEvent(value));
                         }),
                       ],

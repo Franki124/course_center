@@ -42,28 +42,25 @@ class _RegisterState extends State<Register> {
                         reusableText('User name'),
                         buildTextField('Enter your username', 'name', 'user',
                             (value) {
-                          context.read()<RegisterBlocs>().add(UserNameEvent(value));
+                          context.read<RegisterBlocs>().add(UserNameEvent(value));
                         }),
                         reusableText('Email'),
                         buildTextField(
                             'Enter your email address', 'email', 'user',
                             (value) {
-                          context.read()<RegisterBlocs>().add(EmailEvent(value));
+                          context.read<RegisterBlocs>().add(EmailEvent(value));
                         }),
                         reusableText('Password'),
                         buildTextField(
                             'Enter your password', 'password', 'lock', (value) {
-                          context
-                              .read()<RegisterBlocs>().add(PasswordEvent(value))
-                              .add(PasswordEvent(value));
+                          context.read<RegisterBlocs>().add(PasswordEvent(value));
                         }),
                         reusableText('Confirm Password'),
                         buildTextField(
                             'Re-enter your password', 'password', 'lock',
                             (value) {
                           context
-                              .read()<RegisterBlocs>().add(RePasswordEvent(value))
-                              .add(RePasswordEvent(value));
+                              .read<RegisterBlocs>().add(RePasswordEvent(value));
                         }),
                       ],
                     ),
