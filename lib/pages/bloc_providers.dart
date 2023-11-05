@@ -7,6 +7,6 @@ class AppBlocProviders {
   static get allBlocProviders => [
     BlocProvider(lazy: false, create: (context) => WelcomeBloc()),
     BlocProvider(create: (context) => SignInBloc()),
-    BlocProvider(create: (context) => RegisterBlocs()),
+    BlocProvider(create: (context) => RegisterBloc()),
   ];
 }
